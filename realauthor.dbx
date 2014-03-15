@@ -11,9 +11,8 @@
 % This work has the LPPL maintenance status `maintained'.
 % 
 % The Current Maintainer of this work is Maïeul Rouquette
-% This work consists of the files realauthor.dbx
+% This work consists of the files realauthor.dbx, realauthor.bbx
 
 
 \DeclareDatamodelFields[type=list,datatype=name]{realauthor}
 \DeclareDatamodelEntryfields[manuscript]{realauthor}
-
