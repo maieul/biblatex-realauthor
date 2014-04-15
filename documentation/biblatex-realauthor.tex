@@ -1,0 +1,44 @@
+\documentclass{ltxdockit}[2011/03/25]
+\usepackage{btxdockit}
+\usepackage{fontspec}
+\usepackage[mono=false]{libertine}
+\usepackage{microtype}
+\usepackage[american]{babel}
+\usepackage[strict]{csquotes}
+\setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}
+\usepackage{shortvrb}
+\usepackage{pifont}
+\usepackage{minted}
+% Usefull commands
+\newcommand{\biblatex}{biblatex\xspace}
+\pretocmd{\bibfield}{\sloppy}{}{}
+\pretocmd{\bibtype}{\sloppy}{}{}
+% Meta-datas
+\titlepage{%
+	title={Description of real authors with biblatex},
+	subtitle={New data field},
+	email={maieul <at> maieul <dot> net},
+	author={Maïeul Rouquette},
+	revision={1.0.0},
+	date={15/04/2014},
+	url={https://github.com/maieul/biblatex-realauthor}}
+
+
+\begin{document}
+
+\printtitlepage
+\tableofcontents
+\section{Introduction}
+
+
+\section{Change history}
+
+\begin{changelog}
+
+
+
+\begin{release}{1.0.0}{2014-04-15}
+\item First public release.
+\end{release}
+\end{changelog}
+\end{document}
