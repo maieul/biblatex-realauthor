@@ -13,6 +13,7 @@
 \newcommand{\biblatex}{biblatex\xspace}
 \pretocmd{\bibfield}{\sloppy}{}{}
 \pretocmd{\bibtype}{\sloppy}{}{}
+\newcommand{\namebibstyle}[1]{\texttt{#1}}
 % Meta-datas
 \titlepage{%
 	title={Description of real authors with biblatex},
@@ -34,9 +35,18 @@ The standard biblatex fields allow to describe the author of a work, with the so
 
 \section{Basic use}
 
+\subsection{The .bib file}
 Basically, you just have to add the real author name in the field \bibfield{realauthor}, like in the two following examples: 
 
 \inputminted{tex}{example.bib}
+
+\subsection{Loading of the \biblatex package}
+
+When loading the \biblatex package, use the \namebibstyle{realauthor}  bibstyle, which is based on the \namebibstyle{verbose} bibstyle:
+
+\begin{minted}{latex}
+\usepackage[citestyle=verbose,bibstyle=realauthor]{biblatex}
+\end{minted}
 
 \section{Change history}
 
