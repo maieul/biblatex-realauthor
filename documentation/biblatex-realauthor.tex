@@ -24,6 +24,9 @@
 	date={15/04/2014},
 	url={https://github.com/maieul/biblatex-realauthor}}
 
+% biblatex
+\usepackage[bibstyle=realauthor]{biblatex}
+\addbibresource{example.bib}
 
 \begin{document}
 
@@ -47,6 +50,15 @@ When loading the \biblatex package, use the \namebibstyle{realauthor}  bibstyle,
 \begin{minted}{latex}
 \usepackage[citestyle=verbose,bibstyle=realauthor]{biblatex}
 \end{minted}
+
+\subsection{Example of result}
+
+By default, the real author name is printed in brackets, with an equal, between fine nonbreak spaces,  when a pseudonym is also use:
+\begin{quotation}
+\cite{LeClerc1686}
+
+\cite{Simon1686}
+\end{quotation}
 
 \section{Change history}
 
