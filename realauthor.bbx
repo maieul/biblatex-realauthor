@@ -20,9 +20,11 @@
 
 \newcommand{\mkbibrealauthor}[1]{%
 	\ifnameundef{author}%
-		{\mkbibbrackets{#1}}%
-		{\mkbibbrackets{\,=\,#1}}%
+		{\mkrealauthor{#1}}%
+		{\mkrealauthor{\realauthorequalsign#1}}%
 }
+\newcommand{\mkrealauthor}[1]{\mkbibbrackets{#1}}
+\newcommand{\realauthorequalsign}{\,=\,}
 
 % A format which could be overrided
 

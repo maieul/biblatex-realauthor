@@ -60,6 +60,21 @@ By default, the real author name is printed in brackets, with an equal, between 
 \cite{Simon1686}
 \end{quotation}
 
+\section{Customization}
+
+You can redefine the \cmd{mkrealauthor} command to change the way the real author name is printed. Default value is:
+
+\begin{minted}{tex}
+\newcommand{\mkrealauthor}[1]{\mkbibbrackets{#1}}
+\end{minted}
+
+You can also redefine the \cmd{realauthorequalsign} command to change the signe before the real author name when a pseudonym is also used. Default value is:
+
+\begin{minted}{tex}
+\newcommand{\realauthorequalsign}{\,=\,}
+\end{minted}
+
+For more customization, you have to redefine the macros defined in \file{realauthor.bbx}.
 \section{Change history}
 
 \begin{changelog}
