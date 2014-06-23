@@ -51,6 +51,8 @@ When loading the \biblatex package, use the \namebibstyle{realauthor}  bibstyle,
 \usepackage[citestyle=verbose,bibstyle=realauthor]{biblatex}
 \end{minted}
 
+Not that the package patches \verb+author+ and \verb+author/editor+others/translator+others+ macro. If you redefine them, don't forget the patches\footnote{We suppose that, if you redefine them, you could understand the packages.}.
+
 \subsection{Example of result}
 
 By default, the real author name is printed in brackets, with an equal, between fine nonbreak spaces,  when a pseudonym is also use:
@@ -75,6 +77,8 @@ You can also redefine the \cmd{realauthorequalsign} command to change the sign b
 \end{minted}
 
 For more customization, you have to redefine the macros defined in \file{realauthor.bbx}.
+
+
 
 \section{Use with biblatex-manuscripts-philology}
 
