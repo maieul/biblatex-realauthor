@@ -12,7 +12,9 @@
 % 
 % The Current Maintainer of this work is Maïeul Rouquette
 % This work consists of the files realauthor.dbx, realauthor.bbx
-
+\ProvidesFile{realauthor.dbx}
+[\abx@bbxid]
 
 \DeclareDatamodelFields[type=list,datatype=name]{realauthor}
 \DeclareDatamodelEntryfields[manuscript]{realauthor}
+\endinput
