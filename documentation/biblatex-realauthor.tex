@@ -68,10 +68,10 @@ You can redefine the \cmd{mkrealauthor} command to change the way the real autho
 \newcommand{\mkrealauthor}[1]{\mkbibbrackets{#1}}
 \end{minted}
 
-You can also redefine the \cmd{realauthorequalsign} command to change the signe before the real author name when a pseudonym is also used. Default value is:
+You can also redefine the \cmd{realauthorequalsign} command to change the sign before the real author name when a pseudonym is also used. Default value is:
 
 \begin{minted}{tex}
-\newcommand{\realauthorequalsign}{\,=\,}
+\newcommand{\realauthorequalsign}{\addnbthinspace=\addnbthinspace}
 \end{minted}
 
 For more customization, you have to redefine the macros defined in \file{realauthor.bbx}.
