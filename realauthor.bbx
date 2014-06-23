@@ -14,7 +14,11 @@
 % This work consists of the files realauthor.dbx, realauthor.bbx
 \ProvidesFile{realauthor.bbx}
 [\abx@bbxid]
-\RequireBibliographyStyle{verbose}
+
+\ifdef{\biblatexmultipledm@bibstyle}
+	{\RequireBibliographyStyle{\biblatexmultipledm@bibstyle}}
+	{\RequireBibliographyStyle{verbose}}
+
 \RequirePackage{xpatch}
 
 % Command for being redefined
@@ -53,5 +57,3 @@
 	{}
 
 \endinput
-
-
