@@ -69,4 +69,36 @@
 	{}
 	{}
 
+% Sorting
+
+
+\DeclareSortingScheme{anonymous+realauthor}{
+  \sort{
+    \field{presort}
+  }
+  \sort[final]{
+    \field{sortkey}
+  }
+  \sort{
+    \field{sortname}
+    \field{labelname}
+    \field{realauthor}
+    \literal{0000}
+  }
+  \sort{
+    \field{sorttitle}
+    \field{title}
+    \field{maintitle}
+  }
+  \sort{
+    \field{sortyear}
+    \field{year}
+  }
+  \sort{
+    \field[padside=left,padwidth=4,padchar=0]{volume}
+    \literal{0000}
+  }
+}
+
+
 \endinput
