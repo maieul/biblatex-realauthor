@@ -62,6 +62,9 @@ By default, the real author name is printed in brackets, with an equal, between 
 \cite{Simon1686}
 \end{quotation}
 
+\subsubsection{Sorting}
+
+The package provides a sorting scheme: \verb+anonymous+realauthor+, which push the anonymous texts at the begining, but considers the \bibtype{realauthor} field to sort list by authors' name.
 \section{Customization}
 
 You can redefine the \cmd{mkrealauthor} command to change the way the real author name is printed. Default value is:
@@ -101,6 +104,7 @@ To use this package with the features of \verb+biblatex-manuscripts-philology+, 
 
 
 \begin{release}{1.1.0}{2014-10-09}
+\item Add \verb+anonymous+realauthor+ sorting scheme.  
 \item Compatibility with \bibtype{article} entry. 
 \end{release}
 
