@@ -50,6 +50,19 @@
 	\printnames{realauthor}%
 }{}{}
 
+\xpatchbibmacro{author/editor+others}
+	{not test {\ifnameundef{author}}}
+	{not (test {\ifnameundef{author}} and test {\ifnameundef{realauthor}})}
+	{}
+	{}
+
+
+\xpatchbibmacro{author/translator+others}
+	{not test {\ifnameundef{author}}}
+	{not (test {\ifnameundef{author}} and test {\ifnameundef{realauthor}})}
+	{}
+	{}
+
 \xpatchbibmacro{author/editor+others/translator+others}
 	{not test {\ifnameundef{author}}}
 	{not (test {\ifnameundef{author}} and test {\ifnameundef{realauthor}})}
