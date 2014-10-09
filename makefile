@@ -4,9 +4,9 @@ FILES = *.bbx *.dbx *.lbx documentation   makefile README
 dist: all
 	rm -rf biblatex-realauthor
 	mkdir biblatex-realauthor
-	cp README *bbx *dbx *makefile biblatex-realauthor
+	ln README *bbx *dbx *makefile biblatex-realauthor
 	mkdir biblatex-realauthor/documentation
-	cp documentation/*tex documentation/*bib documentation/*pdf documentation/makefile  biblatex-realauthor/documentation
+	ln documentation/*tex documentation/*bib documentation/*pdf documentation/makefile  biblatex-realauthor/documentation
 	$(RM) ../biblatex-realauthor.zip
 	zip -r ../biblatex-realauthor.zip biblatex-realauthor
 
