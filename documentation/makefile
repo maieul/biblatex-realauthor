@@ -1,5 +1,6 @@
 all: *tex *bib
 	xelatex --shell-escape biblatex-realauthor.tex
+	biber biblatex-realauthor
 	xelatex --shell-escape biblatex-realauthor.tex
 	xelatex --shell-escape example.tex
 	biber example
