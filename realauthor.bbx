@@ -59,7 +59,7 @@
   
  
 % Patching some standard bibmacros
-
+%% For the drivers
 \xapptobibmacro{author}{%
 	\ifnameundef{author}{}{%
 		\ifnameundef{realauthor}{}{\addspace\nopunct}%
@@ -86,7 +86,21 @@
 	{}
 	{}
 
-% Sorting
+%% For the shorter version
+
+\newbibmacro{realauthor:as:labelname}{%
+  \ifnamesequal{labelname}{realauthor}%
+    {\printnames{realauthor}}%
+    {\printnames{labelname}%
+    \ifnameundef{realauthor}{}{\addspace\nopunct}%
+    \printnames{realauthor}%
+    }%  
+}
+\xpatchbibmacro{cite:name}{\printnames{labelname}}{\usebibmacro{realauthor:as:labelname}}{}{}
+
+
+
+% Sorting (obsolete)
 
 
 \DeclareSortingScheme{anonymous+realauthor}{
