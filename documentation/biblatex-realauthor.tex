@@ -20,8 +20,8 @@
 	subtitle={New data field},
 	email={maieul <at> maieul <dot> net},
 	author={Maïeul Rouquette},
-	revision={2.0.0},
-	date={27/10/2014},
+	revision={1.1.0},
+	date={09/10/2014},
 	url={https://github.com/maieul/biblatex-realauthor}}
 
 % biblatex
@@ -62,7 +62,7 @@ By default, the real author name is printed in brackets, with an equal, between 
 \cite{Simon1686}
 \end{quotation}
 
-\subsection{Label field}\label{field:label}
+
 
 This package, since version 2.0.0, declares  the \bibfield{realauthor} name as the \bibfield{labelname}, if a \bibfield{author} name is not defined.
 
@@ -73,6 +73,9 @@ That implies this field is use for:
 \end{itemize}
 
 Note that this field is not affected by \verb+useauthor+ option.
+
+\subsection{Sorting}
+The package provides a sorting scheme: \verb|anonymous+realauthor|, which push the anonymous texts at the begining, but considers the \bibtype{realauthor} field to sort list by authors' name.
 \section{Customization}
 
 You can redefine the \cmd{mkrealauthor} command to change the way the real author name is printed. Default value is:
