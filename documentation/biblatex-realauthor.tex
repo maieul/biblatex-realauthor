@@ -20,8 +20,8 @@
 	subtitle={New data field},
 	email={maieul <at> maieul <dot> net},
 	author={Maïeul Rouquette},
-	revision={1.1.0},
-	date={09/10/2014},
+	revision={2.1.0},
+	date={30/10/2014},
 	url={https://github.com/maieul/biblatex-realauthor}}
 
 % biblatex
@@ -74,8 +74,15 @@ That implies this field is use for:
 
 Note that this field is not affected by \verb+useauthor+ option.
 
-\subsection{Sorting}
-The package provides a sorting scheme: \verb|anonymous+realauthor|, which push the anonymous texts at the begining, but considers the \bibtype{realauthor} field to sort list by authors' name.
+\subsection{Sorting}\label{sorting}
+
+The default sorting schemes \verb+nty+ is problematic, because it doesn't consider the \bibfield{realauthor} field  as a name. That is why the package provides two sorting scheme:
+
+\begin{itemize}
+   \item  \verb|anonymous|, which  but considers the \bibfield{realauthor} field to sort list by authors' name. If an entry has both \bibfield{realauthor} and \bibfield{author}, only the \bibfield{author} field we be used.
+  \item  \verb|anonymous+realauthor|, which push the anonymous texts at the begininng of the list (as the \verb+anonymous+ sorting of the \emph{biblatex-anonymous+} package), but considers the \bibfield{realauthor} field to sort list by authors' name (as the \verb+realauthor+ sorting).
+  
+  See the example file to have an illustration.
 \section{Customization}
 
 You can redefine the \cmd{mkrealauthor} command to change the way the real author name is printed. Default value is:
@@ -109,6 +116,11 @@ All issues can be submitted, in French or English, in the GitHub issues page\foo
 
 \begin{changelog}
 
+  \begin{release}{2.1.0}{2014-10-30}
+  \item Add new \verb|realauthor| scheme. \see{sorting}
+  \end{release}
+
+
   \begin{release}{2.0.0}{2014-10-27}
   \item Print the realauthor name in bracket when cited in a abreviated form.
   \item Define \bibtype{realauthor} as \bibtype{labelname}. \see{field:label}
@@ -116,7 +128,7 @@ All issues can be submitted, in French or English, in the GitHub issues page\foo
 
 \begin{release}{1.1.0}{2014-10-09}
 \item In a bibliographical list, print the last name before the first name of a real author, except if a \bibfield{author} is defined.
-\item Add \verb+anonymous+realauthor+ sorting scheme.  
+\item Add \verb|anonymous+realauthor| sorting scheme.   \see{sorting}
 \item Compatibility with \bibtype{article} entry. 
 \end{release}
 
