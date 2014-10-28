@@ -1,19 +1,30 @@
 \documentclass{article}
-\usepackage{polyglossia}
-\setmainlanguage{french}
-\usepackage{fontspec,xpatch}
-\usepackage[citestyle=verbose-trad2,bibstyle=realauthor]{biblatex}
+
+\usepackage[bibstyle=verbose, citestyle=verbose-trad2,bibstyle=realauthor]{biblatex}
+
 \bibliography{example.bib}
 
 \begin{document}
 
-\cite{LeClerc1686}
+\cite{Author+realauthor}
 
-\cite{Simon1686}
+\cite{Only-realauthor}
 
-\cite{LeClerc1686}
+\cite{noauthor-norealauthor}
 
-\cite{Simon1686}
+\cite{Author+realauthor}
+
+\cite{Only-realauthor}
+
+\cite{noauthor-norealauthor}
+
+\cite{noauthor-norealauthor2}
+
+\printbibliography[sorting=nty,title={Default sorting (nty)}]
+
+\printbibliography[sorting=realauthor,title={realauthor sorting}]
+
+\printbibliography[sorting=anonymous+realauthor,title={anonymous+realauthor sorting}]
 
 
 \end{document}

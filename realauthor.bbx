@@ -100,34 +100,65 @@
 
 
 
-% Sorting (obsolete)
+% Sorting
 
 
-\DeclareSortingScheme{anonymous+realauthor}{
-  \sort{
-    \field{presort}
+\DeclareSortingScheme{realauthor}{
+ \sort{
+   \field{presort}
   }
   \sort[final]{
-    \field{sortkey}
+   \field{sortkey}
   }
   \sort{
-    \field{sortname}
-    \field{labelname}
-    \field{realauthor}
-    \literal{0000}
+   \field{sortname}
+   \field{author}
+   \field{realauthor}
+   \field{editor}
+   \field{translator}
+   \field{sorttitle}
+   \field{title}
   }
   \sort{
-    \field{sorttitle}
-    \field{title}
-    \field{maintitle}
+   \field{sorttitle}
+   \field{title}
   }
   \sort{
-    \field{sortyear}
-    \field{year}
+   \field{sortyear}
+   \field{year}
   }
   \sort{
-    \field[padside=left,padwidth=4,padchar=0]{volume}
-    \literal{0000}
+   \field[padside=left,padwidth=4,padchar=0]{volume}
+   \literal{0000}
+  }
+}
+
+\DeclareSortingScheme{anonymous+realauthor}{
+ \sort{
+   \field{presort}
+  }
+  \sort[final]{
+   \field{sortkey}
+  }
+  \sort{
+   \field{sortname}
+   \field{author}
+   \field{realauthor}
+   \field{editor}
+   \field{translator}
+   \literal{0000}
+  }
+  \sort{
+   \field{sorttitle}
+   \field{title}
+  }
+  \sort{
+   \field{sortyear}
+   \field{year}
+  }
+  \sort{
+   \field[padside=left,padwidth=4,padchar=0]{volume}
+   \literal{0000}
   }
 }
 
