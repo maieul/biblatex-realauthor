@@ -1,0 +1,11 @@
+all: *tex *bib
+	xelatex --shell-escape biblatex-realauthor.tex
+	biber biblatex-realauthor
+	xelatex --shell-escape biblatex-realauthor.tex
+	xelatex --shell-escape example.tex
+	biber example
+	xelatex --shell-escape example.tex
+
+clean:realauthor
+	$(MAKE) -C documentation clean
+	@$(RM) *.pdf *.toc *.aux *.out *.fdb_latexmk *.log *.bbl *.bcf *.blg *run.xml *.synctex.gz*

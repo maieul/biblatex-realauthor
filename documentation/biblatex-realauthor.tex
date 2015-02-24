@@ -1,0 +1,139 @@
+\documentclass{ltxdockit}[2011/03/25]
+\usepackage{btxdockit}
+\usepackage{fontspec}
+\usepackage[mono=false]{libertine}
+\usepackage{microtype}
+\usepackage[american]{babel}
+\usepackage[strict]{csquotes}
+\setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}
+\usepackage{shortvrb}
+\usepackage{pifont}
+\usepackage{minted}
+% Usefull commands
+\newcommand{\biblatex}{biblatex\xspace}
+\pretocmd{\bibfield}{\sloppy}{}{}
+\pretocmd{\bibtype}{\sloppy}{}{}
+\newcommand{\namebibstyle}[1]{\texttt{#1}}
+% Meta-datas
+\titlepage{%
+	title={Description of real authors with biblatex},
+	subtitle={New data field},
+	email={maieul <at> maieul <dot> net},
+	author={Maïeul Rouquette},
+	revision={2.1.0},
+	date={30/10/2014},
+	url={https://github.com/maieul/biblatex-realauthor}}
+
+% biblatex
+\usepackage[bibstyle=realauthor,citestyle=verbose]{biblatex}
+\addbibresource{example.bib}
+
+\begin{document}
+
+\printtitlepage
+\tableofcontents
+\section{Introduction}
+
+The standard biblatex fields allow to describe the author of a work, with the so called \bibfield{authors} field. However, some works are published without name, or with pseudonyme, but the scholars know the real author. This package adds a new field \bibfield{realauthor}, to specify the knew real author.
+
+\section{Basic use}
+
+\subsection{The .bib file}
+Basically, you just have to add the real author name in the field \bibfield{realauthor}, like in the two following examples: 
+
+\inputminted{tex}{example.bib}
+
+\subsection{Loading of the \biblatex package}
+
+When loading the \biblatex package, use the \namebibstyle{realauthor}  bibstyle, which is based on the \namebibstyle{verbose} bibstyle:
+
+\begin{minted}{latex}
+\usepackage[citestyle=verbose,bibstyle=realauthor]{biblatex}
+\end{minted}
+
+Not that the package patches \verb+author+ and \verb+author/editor+others/translator+others+ macro. If you redefine them, don't forget the patches\footnote{We suppose that, if you redefine them, you could understand the packages.}.
+
+\subsection{Example of result}
+
+By default, the real author name is printed in brackets, with an equal, between fine nonbreak spaces,  when a pseudonym is also use:
+\begin{quotation}
+\cite{LeClerc1686}
+
+\cite{Simon1686}
+\end{quotation}
+
+\subsection{\bibfield{Labelname} field}\label{field:label} 
+
+This package, since version 2.0.0, declares  the \bibfield{realauthor} name as the \bibfield{labelname}, if a \bibfield{author} name is not defined.
+
+That implies this field is use for:
+\begin{itemize}
+  \item Sorting.
+  \item \emph{ibid} / \emph{op. cit} abreviation.
+\end{itemize}
+
+Note that this field is not affected by \verb+useauthor+ option.
+
+\subsection{Sorting}\label{sorting}
+
+The default sorting schemes \verb+nty+ is problematic, because it doesn't consider the \bibfield{realauthor} field  as a name. That is why the package provides two sorting scheme:
+
+\begin{itemize}
+   \item  \verb|anonymous|, which  but considers the \bibfield{realauthor} field to sort list by authors' name. If an entry has both \bibfield{realauthor} and \bibfield{author}, only the \bibfield{author} field we be used.
+  \item  \verb|anonymous+realauthor|, which push the anonymous texts at the begininng of the list (as the \verb+anonymous+ sorting of the \emph{biblatex-anonymous+} package), but considers the \bibfield{realauthor} field to sort list by authors' name (as the \verb+realauthor+ sorting).
+\end{itemize} 
+  See the example file to have an illustration.
+\section{Customization}
+
+You can redefine the \cmd{mkrealauthor} command to change the way the real author name is printed. Default value is:
+
+\begin{minted}{tex}
+\newcommand{\mkrealauthor}[1]{\mkbibbrackets{#1}}
+\end{minted}
+
+You can also redefine the \cmd{realauthorequalsign} command to change the sign before the real author name when a pseudonym is also used. Default value is:
+
+\begin{minted}{tex}
+\newcommand{\realauthorequalsign}{\addnbthinspace=\addnbthinspace}
+\end{minted}
+
+For more customization, you have to redefine the macros defined in \file{realauthor.bbx}.
+
+
+
+\section{Use with biblatex-manuscripts-philology}
+
+To use this package with the features of \verb+biblatex-manuscripts-philology+, you must use the package \verb+biblatex-multiple-dm+.
+
+\section{Credits}
+
+This package was created for Maïeul Rouquette's phd dissertation\footnote{\url{http://apocryphes.hypothese.org}.} in 2014. It is licensed on the \emph{\LaTeX\ Project Public License}\footnote{\url{http://latex-project.org/lppl/lppl-1-3c.html}.}.
+
+
+All issues can be submitted, in French or English, in the GitHub issues page\footnote{\url{https://github.com/maieul/biblatex-realauthor/issues}.}.
+
+\section{Change history}
+
+\begin{changelog}
+
+  \begin{release}{2.1.0}{2014-10-30}
+  \item Add new \verb|realauthor| scheme. \see{sorting}
+  \end{release}
+
+
+  \begin{release}{2.0.0}{2014-10-27}
+  \item Print the realauthor name in bracket when cited in a abreviated form.
+  \item Define \bibfield{realauthor} as \bibfield{labelname}. \see{field:label}
+  \end{release}
+
+\begin{release}{1.1.0}{2014-10-09}
+\item In a bibliographical list, print the last name before the first name of a real author, except if a \bibfield{author} is defined.
+\item Add \verb|anonymous+realauthor| sorting scheme.   \see{sorting}
+\item Compatibility with \bibtype{article} entry. 
+\end{release}
+
+\begin{release}{1.0.0}{2014-06-25}
+\item First public release.
+\end{release}
+\end{changelog}
+\end{document}
