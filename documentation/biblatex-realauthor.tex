@@ -74,6 +74,8 @@ That implies this field is use for:
 
 Note that this field is not affected by \verb+useauthor+ option, but it is by \verb+userealauthor+ option \secref{userealauthor}.
 
+Used in a bibliography macro or driver, \cmd{ifuserealauthor}\mprm{true}\mprem{false} expands to \prm{true} if the \opt{userealauthor} option is enabled (either globally or for the current entry), and \prm{false} otherwise.
+
 \subsection{Sorting}\label{sorting}
 
 The default sorting schemes \verb+nty+ is problematic, because it doesn't consider the \bibfield{realauthor} field  as a name. That is why the package provides two sorting scheme:
@@ -95,6 +97,7 @@ This option :
 	\item With the default style, and contrary to the \verb+useauthor+ option, also disable printing of \bibfield{realauthor}.
 \end{itemize}
 
+
 \section{Customization}
 
 You can redefine the \cmd{mkrealauthor} command to change the way the real author name is printed. Default value is:
@@ -110,6 +113,7 @@ You can also redefine the \cmd{realauthorequalsign} command to change the sign b
 \end{minted}
 
 For more customization, you have to redefine the macros defined in \file{realauthor.bbx}.
+
 
 
 
