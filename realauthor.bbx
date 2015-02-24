@@ -61,10 +61,12 @@
 % Patching some standard bibmacros
 %% For the drivers
 \xapptobibmacro{author}{%
-	\ifnameundef{author}{}{%
+	\ifuserealauthor{%
+	  \ifnameundef{author}{}{%
 		\ifnameundef{realauthor}{}{\addspace\nopunct}%
-	}%
-	\printnames{realauthor}%
+	  }%
+	  \printnames{realauthor}%
+	}{}%
 }{}{}
 
 \xpatchbibmacro{author/editor+others}
