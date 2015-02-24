@@ -20,11 +20,14 @@
 
 \cite{noauthor-norealauthor2}
 
-\printbibliography[sorting=nty,title={Default sorting (nty)}]
+\newrefcontext[sorting=nty]
+\printbibliography[title={Default sorting (nty)}]
 
-\printbibliography[sorting=realauthor,title={realauthor sorting}]
+\newrefcontext[sorting=realauthor]
+\printbibliography[title={realauthor sorting}]
 
-\printbibliography[sorting=anonymous+realauthor,title={anonymous+realauthor sorting}]
+\newrefcontext[sorting=anonymous+realauthor]
+\printbibliography[title={anonymous+realauthor sorting}]
 
 
 \end{document}
