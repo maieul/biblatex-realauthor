@@ -1,6 +1,6 @@
 \documentclass{article}
 
-\usepackage[bibstyle=verbose, citestyle=verbose-trad2,bibstyle=realauthor]{biblatex}
+\usepackage[userealauthor=true,bibstyle=verbose, citestyle=verbose-trad2,bibstyle=realauthor]{biblatex}
 
 \bibliography{example.bib}
 
@@ -20,16 +20,16 @@
 
 \cite{noauthor-norealauthor2}
 
-\newrefcontext[sorting=nty]
+\begin{refcontext}[sorting=nty]
 \printbibliography[title={Default sorting (nty)}]
-\endrefcontext
+\end{refcontext}
 
-\newrefcontext[sorting=realauthor]
+\begin{refcontext}[sorting=realauthor]
 \printbibliography[title={realauthor sorting}]
-\endrefcontext
+\end{refcontext}
 
-\newrefcontext[sorting=anonymous+realauthor]
+\begin{refcontext}[sorting=anonymous+realauthor]
 \printbibliography[title={anonymous+realauthor sorting}]
-\endrefcontext
+\end{refcontext}
 
 \end{document}
