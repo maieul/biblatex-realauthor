@@ -20,8 +20,8 @@
 	subtitle={New data field},
 	email={maieul <at> maieul <dot> net},
 	author={Maïeul Rouquette},
-	revision={2.1.0},
-	date={30/10/2014},
+	revision={2.2.0},
+	date={xxx/02/2015},
 	url={https://github.com/maieul/biblatex-realauthor}}
 
 % biblatex
@@ -72,7 +72,9 @@ That implies this field is use for:
   \item \emph{ibid} / \emph{op. cit} abreviation.
 \end{itemize}
 
-Note that this field is not affected by \verb+useauthor+ option.
+Note that this field is not affected by \verb+useauthor+ option, but it is by \verb+userealauthor+ option \secref{userealauthor}.
+
+Used in a bibliography macro or driver, \cmd{ifuserealauthor}\mprm{true}\mprem{false} expands to \prm{true} if the \opt{userealauthor} option is enabled (either globally or for the current entry), and \prm{false} otherwise.
 
 \subsection{Sorting}\label{sorting}
 
@@ -83,6 +85,19 @@ The default sorting schemes \verb+nty+ is problematic, because it doesn't consid
   \item  \verb|anonymous+realauthor|, which push the anonymous texts at the begininng of the list (as the \verb+anonymous+ sorting of the \emph{biblatex-anonymous+} package), but considers the \bibfield{realauthor} field to sort list by authors' name (as the \verb+realauthor+ sorting).
 \end{itemize} 
   See the example file to have an illustration.
+  
+\section{Disable realauthor use}\label{userealauthor}
+
+The package, or rather \biblatex, defines an \verb+userealauthor+ option, which can be settable on a per-entry basis in the \bibfield{options} field, or by entrytype, using \cmd{ExecuteBibliographyOptions}, or globally, when loading \biblatex. 
+
+This option :
+\begin{itemize}
+	\item Disable use of \bibfield{realauthor} as label name.
+	\item Disable use of \bibfield{realauthor} for sorting.
+	\item With the default style, and contrary to the \verb+useauthor+ option, also disable printing of \bibfield{realauthor}.
+\end{itemize}
+
+
 \section{Customization}
 
 You can redefine the \cmd{mkrealauthor} command to change the way the real author name is printed. Default value is:
@@ -101,6 +116,7 @@ For more customization, you have to redefine the macros defined in \file{realaut
 
 
 
+
 \section{Use with biblatex-manuscripts-philology}
 
 To use this package with the features of \verb+biblatex-manuscripts-philology+, you must use the package \verb+biblatex-multiple-dm+.
@@ -115,6 +131,10 @@ All issues can be submitted, in French or English, in the GitHub issues page\foo
 \section{Change history}
 
 \begin{changelog}
+
+  \begin{release}{2.2.0}{2015-02-xxx}
+  \item Add new \verb|userealauthor| option. Require \biblatex~3.0. \see{userealauthor}
+  \end{release}
 
   \begin{release}{2.1.0}{2014-10-30}
   \item Add new \verb|realauthor| scheme. \see{sorting}
