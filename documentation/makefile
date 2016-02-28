@@ -2,9 +2,10 @@ all: *tex *bib
 	xelatex --shell-escape biblatex-realauthor.tex
 	biber biblatex-realauthor
 	xelatex --shell-escape biblatex-realauthor.tex
-	xelatex --shell-escape example.tex
-	biber example
-	xelatex --shell-escape example.tex
+	xelatex --shell-escape example-realauthor.tex
+	biber example-realauthor
+	xelatex --shell-escape example-realauthor.tex
+	xelatex --shell-escape example-realauthor.tex
 
 clean:realauthor
 	$(MAKE) -C documentation clean
