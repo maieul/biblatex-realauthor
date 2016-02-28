@@ -13,8 +13,8 @@
 % The Current Maintainer of this work is Maïeul Rouquette
 % This work consists of the files realauthor.dbx, realauthor.bbx
 \ProvidesFile{realauthor.dbx}
-[2015/94/26 v2.2.0 biblatex bibliography style (MR)]
+[2016/28/02 v2.2.1 biblatex bibliography style (MR)]
 
 \DeclareDatamodelFields[type=list,datatype=name]{realauthor}
-\DeclareDatamodelEntryfields[manuscript]{realauthor}
+\DeclareDatamodelEntryfields{realauthor}
 \endinput
