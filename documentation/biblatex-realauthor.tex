@@ -20,8 +20,8 @@
 	subtitle={New data field},
 	email={maieul <at> maieul <dot> net},
 	author={Maïeul Rouquette},
-	revision={2.2.1},
-	date={28/02/2016},
+	revision={2.3.0},
+	date={03/11/2016},
 	url={https://github.com/maieul/biblatex-realauthor}}
 
 % biblatex
@@ -37,6 +37,10 @@
 The standard biblatex fields allow to describe the author of a work, with the so called \bibfield{authors} field. However, some works are published without name, or with pseudonyme, but the scholars know the real author. This package adds a new field \bibfield{realauthor}, to specify the knew real author.
 
 \section{Basic use}
+
+\subsection{Requirement}
+
+The packages require \biblatex~3.3 or later.
 
 \subsection{The .bib file}
 Basically, you just have to add the real author name in the field \bibfield{realauthor}, like in the two following examples: 
@@ -131,6 +135,11 @@ All issues can be submitted, in French or English, in the GitHub issues page\foo
 \section{Change history}
 
 \begin{changelog}
+
+  \begin{release}{2.3.0}{2016-03-11}
+  \item Compatibility with biblatex 3.3.
+  \end{release}
+
   \begin{release}{2.2.1}{2016-02-28}
   \item Correct description of datamodel specification about which entrytype can have a \bibfield{realauthor} field.
   \end{release}
