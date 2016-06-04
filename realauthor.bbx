@@ -13,7 +13,7 @@
 % The Current Maintainer of this work is Maïeul Rouquette
 % This work consists of the files realauthor.dbx, realauthor.bbx
 \ProvidesFile{realauthor.dbx}
-[2016/03/11 v2.3.0 biblatex bibliography style (MR)]
+[2016/06/05 v2.4.0 biblatex bibliography style (MR)]
 
 \ifdef{\biblatexmultipledm@bibstyle}
 	{\RequireBibliographyStyle{\biblatexmultipledm@bibstyle}}
@@ -30,6 +30,7 @@
   \field{realauthor}
   \field{shorteditor}
   \field{editor}
+  \field{realeditor}%
   \field{translator}}
 
 % Command for being redefined
@@ -42,6 +43,13 @@
 \newcommand{\mkrealauthor}[1]{\mkbibbrackets{#1}}
 \newcommand{\realauthorequalsign}{\addnbthinspace=\addnbthinspace}
 
+\newcommand{\mkbibrealeditor}[1]{%
+	\ifnameundef{editor}%
+		{\mkrealeditor{#1}}%
+		{\mkrealeditor{\realeditorequalsign#1}}%
+}
+\newcommand{\mkrealeditor}[1]{\mkrealauthor{#1}}%
+\newcommand{\realeditorequalsign}{\realauthorequalsign}%
 % A format which could be overrided
 
 \DeclareNameFormat{realauthor}{%
@@ -58,16 +66,28 @@
    }%
   \usebibmacro{name:andothers}}}
   
+\DeclareNameFormat{realeditor}{%
+ \nameparts{#1}%
+ \mkbibrealeditor{%
+   \ifboolexpr{test {\ifbibliography} and test {\ifnameundef{editor}}}%
+   {\ifgiveninits%
+    {\usebibmacro{name:family-given}{\namepartfamily}{\namepartgiveni}{\namepartprefix}{\namepartsuffix}}%
+    {\usebibmacro{name:family-given}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}}%
+   }%
+   {\ifgiveninits%
+    {\usebibmacro{name:given-family}{\namepartfamily}{\namepartgiveni}{\namepartprefix}{\namepartsuffix}}%
+    {\usebibmacro{name:given-family}{\namepartfamily}{\namepartgiven}{\namepartprefix}{\namepartsuffix}}%
+   }%
+  \usebibmacro{name:andothers}}} 
  
 % Patching some standard bibmacros
 %% For the drivers
 \xapptobibmacro{author}{%
-	\ifuserealauthor{%
 	  \ifnameundef{author}{}{%
-		\ifnameundef{realauthor}{}{\addspace\nopunct}%
+		  \ifnameundef{realauthor}{}{\addspace\nopunct}%
 	  }%
 	  \printnames{realauthor}%
-	}{}%
+	{}%
 }{}{}
 
 \xpatchbibmacro{author/editor+others}
@@ -89,19 +109,127 @@
 	{}
 	{}
 
+
+\xpatchbibmacro{author/editor+others/translator+others}
+  {\ifboolexpr{
+       test \ifuseeditor
+       and
+       not test {\ifnameundef{editor}}
+     }%
+  }
+  {\ifboolexpr{
+    (test \ifuseeditor%
+      and
+      not test {\ifnameundef{editor}}%
+    )
+    or
+    (test \ifuserealeditor%
+      and 
+      not test {\ifnameundef{realeditor}}%
+    )%
+    }%
+  }
+{}{}
+
+
+
+
+\xpatchbibmacro{bbx:editor}
+  {\ifboolexpr{
+    test \ifuseeditor
+    and
+    not test {\ifnameundef{editor}}
+  }}
+  {\ifboolexpr{
+    (test \ifuseeditor%
+      and
+      not test {\ifnameundef{editor}}%
+    )
+    or
+    (test \ifuserealeditor%
+      and 
+      not test {\ifnameundef{realeditor}}%
+    )%
+    }%
+  }
+{}{}
+\xpatchbibmacro{bbx:editor}
+  {\clearname{editor}}
+  {\clearname{editor}
+   \clearname{realeditor}
+  }
+{}{}
+
+\xpatchbibmacro{bbx:editor}
+  {\printnames{editor}}%
+  {\printnames{editor}%
+  \usebibmacro{printeditor}%
+  }%
+{}{}
+
+
+\xpatchbibmacro{byeditor}
+ {\ifnameundef{editor}}%
+ {\ifboolexpr{test{\ifnameundef{editor}} and test{\ifnameundef{realeditor}}}}%
+{}{}
+
+\xpatchbibmacro{byeditor}
+  {\printnames[byeditor]{editor}}%
+  {\usebibmacro{printbyeditor+realeditor}}
+{}{}
+
+\xpatchbibmacro{byeditor+others}
+ {\ifnameundef{editor}}%
+ {\ifboolexpr{test{\ifnameundef{editor}} and test{\ifnameundef{realeditor}}}}%
+{}{}
+
+\xpatchbibmacro{byeditor+others}
+  {\printnames[byeditor]{editor}}%
+  {\usebibmacro{printbyeditor+realeditor}}
+{}{}
+
+\newbibmacro{printbyeditor+realeditor}{%
+  \printnames[byeditor]{editor}%
+  \ifnameundef{editor}{}{%
+		  \ifnameundef{realeditor}{}{\addspace\nopunct}%
+	}%
+	\printnames{realeditor}%
+}
+
+\newbibmacro{printeditor}{%
+	  \ifnameundef{editor}{}{%
+		  \ifnameundef{realeditor}{}{\addspace\nopunct}%
+	  }%
+	  \printnames{realeditor}%
+}
+
 %% For the shorter version
 
 \newbibmacro{realauthor:as:labelname}{%
-  \ifnamesequal{labelname}{realauthor}%
-    {\printnames{realauthor}}%
-    {\printnames{labelname}%
-    \ifnameundef{realauthor}{}{\addspace\nopunct}%
-    \printnames{realauthor}%
-    }%  
+  \ifboolexpr{%
+    test {\ifnamesequal{labelname}{realauthor}}%
+    or
+    test {\ifnamesequal{labelname}{realeditor}}%
+   }{%
+      \ifnamesequal{labelname}{realauthor}%
+       {\printnames{realauthor}}%
+       {\printnames{realeditor}}%
+    }%
+    {%
+      \printnames{labelname}%
+      \ifnamesequal{labelname}{author}{%
+        \ifnameundef{realauthor}{}{\addspace\nopunct}%
+        \printnames{realauthor}%
+      }{}% 
+      \ifnamesequal{labelname}{editor}{%
+        \ifnameundef{realeditor}{}{\addspace\nopunct}%
+        \printnames{realeditor}%
+      }{}%
+    }%
 }
-\xpatchbibmacro{cite:name}{\printnames{labelname}}{\usebibmacro{realauthor:as:labelname}}{}{}
-
-
+\AtBeginDocument{%
+  \xpatchbibmacro{cite:name}{\printnames{labelname}}{\usebibmacro{realauthor:as:labelname}}{}{}
+}
 
 % Sorting
 
@@ -118,6 +246,7 @@
    \field{author}
    \field{realauthor}
    \field{editor}
+   \field{realeditor}
    \field{translator}
    \field{sorttitle}
    \field{title}
@@ -148,6 +277,7 @@
    \field{author}
    \field{realauthor}
    \field{editor}
+   \field{realeditor}
    \field{translator}
    \literal{0000}
   }
