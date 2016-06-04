@@ -111,15 +111,64 @@
 	{}
 	{}
 
-\xapptobibmacro{editor}{%
-	\ifuserealeditor{%
-	  \ifnameundef{editor}{}{%
-		  \ifnameundef{realeditor}{}{\addspace\nopunct}%
-	  }%
-	  \printnames{realeditor}%
-	}%
-	{}%
-}{}{}
+
+\xpatchbibmacro{author/editor+others/translator+others}
+  {\ifboolexpr{
+       test \ifuseeditor
+       and
+       not test {\ifnameundef{editor}}
+     }%
+  }
+  {\ifboolexpr{
+    (test \ifuseeditor%
+      and
+      not test {\ifnameundef{editor}}%
+    )
+    or
+    (test \ifuserealeditor%
+      and 
+      not test {\ifnameundef{realeditor}}%
+    )%
+    }%
+  }
+{}{}
+
+
+
+
+\xpatchbibmacro{bbx:editor}
+  {\ifboolexpr{
+    test \ifuseeditor
+    and
+    not test {\ifnameundef{editor}}
+  }}
+  {\ifboolexpr{
+    (test \ifuseeditor%
+      and
+      not test {\ifnameundef{editor}}%
+    )
+    or
+    (test \ifuserealeditor%
+      and 
+      not test {\ifnameundef{realeditor}}%
+    )%
+    }%
+  }
+{}{}
+\xpatchbibmacro{bbx:editor}
+  {\clearname{editor}}
+  {\clearname{editor}
+   \clearname{realeditor}
+  }
+{}{}
+
+\xpatchbibmacro{bbx:editor}
+  {\printnames{editor}}%
+  {\printnames{editor}%
+  \usebibmacro{printeditor}%
+  }%
+{}{}
+
 
 \xpatchbibmacro{byeditor}
  {\ifnameundef{editor}}%
@@ -149,6 +198,15 @@
 	\printnames{realeditor}%
 }
 
+\newbibmacro{printeditor}{%
+	\ifuserealeditor{%
+	  \ifnameundef{editor}{}{%
+		  \ifnameundef{realeditor}{}{\addspace\nopunct}%
+	  }%
+	  \printnames{realeditor}%
+	}%
+	{}%
+}
 
 %% For the shorter version
 
