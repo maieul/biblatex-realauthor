@@ -231,6 +231,66 @@
   \xpatchbibmacro{cite:name}{\printnames{labelname}}{\usebibmacro{realauthor:as:labelname}}{}{}
 }
 
+% For the dash on the bibliography, in the case two real author use the same pseudonym
+
+
+\DeclareNameFormat{save:real}{%
+ \nameparts{#1}%
+ \savefield{hash}{\bbx@hash@realname}%
+}
+\xapptobibmacro{bbx:savehash}{%
+  \ifboolexpr{%
+    test {\ifnamesequal{labelname}{author}}%
+    and 
+    not test {\ifnameundef{realauthor}}%
+  }%
+    {%
+      \printnames[save:real]{realauthor}%
+      \eappto\bbx@lasthash{\bbx@hash@realname}%
+    }%
+    {}%
+  \ifboolexpr{%
+    test {\ifnamesequal{labelname}{editor}}%
+    and 
+    not test {\ifnameundef{realeditor}}%
+  }%
+    {%
+      \printnames[save:real]{realeditor}%
+      \eappto\bbx@lasthash{\bbx@hash@realname}%
+    }%
+    {}%
+}
+{}{}
+
+\xpretobibmacro{bbx:dashcheck}{%
+  \savefield{fullhash}{\bbx@this@hash}%
+  \ifboolexpr{%
+    test {\ifnamesequal{labelname}{author}}%
+    and 
+    not test {\ifnameundef{realauthor}}%
+  }%
+    {%
+      \printnames[save:real]{realauthor}%
+      \eappto\bbx@thish@hash{\bbx@hash@realname}%
+    }%
+    {}%
+  \ifboolexpr{%
+    test {\ifnamesequal{labelname}{editor}}%
+    and 
+    not test {\ifnameundef{realeditor}}%
+  }%
+    {%
+      \printnames[save:real]{realeditor}%
+      \eappto\bbx@thish@hash{\bbx@hash@realname}%
+    }%
+    {}%
+}
+{}{}
+
+\xpatchbibmacro{bbx:dashcheck}%
+  {\iffieldequals{fullhash}{\bbx@lasthash}}%
+  {\ifdefequal{\bbx@thish@hash}{\bbx@lasthash}}%
+{}{}
 % Sorting
 
 
