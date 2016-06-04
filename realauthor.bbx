@@ -83,12 +83,10 @@
 % Patching some standard bibmacros
 %% For the drivers
 \xapptobibmacro{author}{%
-	\ifuserealauthor{%
 	  \ifnameundef{author}{}{%
 		  \ifnameundef{realauthor}{}{\addspace\nopunct}%
 	  }%
 	  \printnames{realauthor}%
-	}%
 	{}%
 }{}{}
 
@@ -199,13 +197,10 @@
 }
 
 \newbibmacro{printeditor}{%
-	\ifuserealeditor{%
 	  \ifnameundef{editor}{}{%
 		  \ifnameundef{realeditor}{}{\addspace\nopunct}%
 	  }%
 	  \printnames{realeditor}%
-	}%
-	{}%
 }
 
 %% For the shorter version

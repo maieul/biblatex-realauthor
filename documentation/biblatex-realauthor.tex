@@ -114,7 +114,7 @@ This option, when set to false:
 \begin{itemize}
 	\item Disable use of \bibfield{realauthor} as label name.
 	\item Disable use of \bibfield{realauthor} for sorting.
-	\item With the default style, and contrary to the \verb+useauthor+ option, also disable printing of \bibfield{realauthor}.
+	\item Before the version 2.4.0. with the default style, and contrary to the \verb+useauthor+ option, also disabled printing of \bibfield{realauthor}. From version 2.4.0, if you don't want to print the field, don't use the package\ldots.
 \end{itemize}
 
 The same is true for \opt{realeditor} option for the \bibfield{realeditor}. 
@@ -157,6 +157,7 @@ All issues can be submitted, in French or English, in the GitHub issues page\foo
 
   \begin{release}{2.4.0}{2016-06-05}
     \item Add \bibfield{realeditor}.
+    \item Restore normal behavior of \opt{userealeditor}.
     \item Require biblatex 3.3.
   \end{release}
 
