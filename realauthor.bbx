@@ -206,16 +206,30 @@
 %% For the shorter version
 
 \newbibmacro{realauthor:as:labelname}{%
-  \ifnamesequal{labelname}{realauthor}%
-    {\printnames{realauthor}}%
-    {\printnames{labelname}%
-    \ifnameundef{realauthor}{}{\addspace\nopunct}%
-    \printnames{realauthor}%
-    }%  
+  \ifboolexpr{%
+    test {\ifnamesequal{labelname}{realauthor}}%
+    or
+    test {\ifnamesequal{labelname}{realeditor}}%
+   }{%
+      \ifnamesequal{labelname}{realauthor}%
+       {\printnames{realauthor}}%
+       {\printnames{realeditor}}%
+    }%
+    {%
+      \printnames{labelname}%
+      \ifnamesequal{labelname}{author}{%
+        \ifnameundef{realauthor}{}{\addspace\nopunct}%
+        \printnames{realauthor}%
+      }{}% 
+      \ifnamesequal{labelname}{editor}{%
+        \ifnameundef{realeditor}{}{\addspace\nopunct}%
+        \printnames{realeditor}%
+      }{}%
+    }%
 }
-\xpatchbibmacro{cite:name}{\printnames{labelname}}{\usebibmacro{realauthor:as:labelname}}{}{}
-
-
+\AtBeginDocument{%
+  \xpatchbibmacro{cite:name}{\printnames{labelname}}{\usebibmacro{realauthor:as:labelname}}{}{}
+}
 
 % Sorting
 
