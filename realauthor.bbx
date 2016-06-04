@@ -245,6 +245,7 @@
     not test {\ifnameundef{realauthor}}%
   }%
     {%
+      \setunit{}%Bad hack
       \printnames[save:real]{realauthor}%
       \eappto\bbx@lasthash{\bbx@hash@realname}%
     }%
@@ -255,6 +256,7 @@
     not test {\ifnameundef{realeditor}}%
   }%
     {%
+      \setunit{}%Bad hack
       \printnames[save:real]{realeditor}%
       \eappto\bbx@lasthash{\bbx@hash@realname}%
     }%
@@ -270,6 +272,7 @@
     not test {\ifnameundef{realauthor}}%
   }%
     {%
+      \setunit{}%Bad hack
       \printnames[save:real]{realauthor}%
       \eappto\bbx@thish@hash{\bbx@hash@realname}%
     }%
@@ -280,6 +283,7 @@
     not test {\ifnameundef{realeditor}}%
   }%
     {%
+      \setunit{}%Bad hack
       \printnames[save:real]{realeditor}%
       \eappto\bbx@thish@hash{\bbx@hash@realname}%
     }%
