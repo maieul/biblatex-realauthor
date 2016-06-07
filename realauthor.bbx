@@ -13,7 +13,7 @@
 % The Current Maintainer of this work is Maïeul Rouquette
 % This work consists of the files realauthor.dbx, realauthor.bbx
 \ProvidesFile{realauthor.dbx}
-[2016/06/05 v2.4.0 biblatex bibliography style (MR)]
+[2016/06/07 v2.4.1 biblatex bibliography style (MR)]
 
 \ifdef{\biblatexmultipledm@bibstyle}
 	{\RequireBibliographyStyle{\biblatexmultipledm@bibstyle}}
@@ -218,17 +218,22 @@
     {%
       \printnames{labelname}%
       \ifnamesequal{labelname}{author}{%
-        \ifnameundef{realauthor}{}{\addspace\nopunct}%
-        \printnames{realauthor}%
+        \ifnameundef{realauthor}%
+          {}%
+          {\addspace\nopunct\printnames{realauthor}}%
       }{}% 
       \ifnamesequal{labelname}{editor}{%
-        \ifnameundef{realeditor}{}{\addspace\nopunct}%
-        \printnames{realeditor}%
+        \ifnameundef{realeditor}%
+        {}%
+        {\addspace\nopunct\printnames{realeditor}}%
       }{}%
     }%
 }
 \AtBeginDocument{%
-  \xpatchbibmacro{cite:name}{\printnames{labelname}}{\usebibmacro{realauthor:as:labelname}}{}{}
+  \xpatchbibmacro{cite:name}
+    {\printnames{labelname}}
+    {\usebibmacro{realauthor:as:labelname}}
+    {}{}
 }
 
 % Sorting
