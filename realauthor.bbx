@@ -13,7 +13,7 @@
 % The Current Maintainer of this work is Maïeul Rouquette
 % This work consists of the files realauthor.dbx, realauthor.bbx
 \ProvidesFile{realauthor.dbx}
-[2016/06/05 v2.4.0 biblatex bibliography style (MR)]
+[2016/06/09 v2.5.0 biblatex bibliography style (MR)]
 
 \ifdef{\biblatexmultipledm@bibstyle}
 	{\RequireBibliographyStyle{\biblatexmultipledm@bibstyle}}
@@ -81,33 +81,36 @@
   \usebibmacro{name:andothers}}} 
  
 % Patching some standard bibmacros
-%% For the drivers
+\newcommand{\realauthor@failpatch}[1]{\PackageError{realauthor}{Fail to patch `#1` bibmacro}{}}
+
 \xapptobibmacro{author}{%
 	  \ifnameundef{author}{}{%
 		  \ifnameundef{realauthor}{}{\addspace\nopunct}%
 	  }%
 	  \printnames{realauthor}%
 	{}%
-}{}{}
+}
+  {}
+  {\realauthor@failpatch{author}}
 
 \xpatchbibmacro{author/editor+others}
 	{not test {\ifnameundef{author}}}
 	{not (test {\ifnameundef{author}} and test {\ifnameundef{realauthor}})}
 	{}
-	{}
+	{\realauthor@failpatch{author/editor+others}}
 
 
 \xpatchbibmacro{author/translator+others}
 	{not test {\ifnameundef{author}}}
 	{not (test {\ifnameundef{author}} and test {\ifnameundef{realauthor}})}
 	{}
-	{}
+	{\realauthor@failpatch{author/translator+others}}
 
 \xpatchbibmacro{author/editor+others/translator+others}
 	{not test {\ifnameundef{author}}}
 	{not (test {\ifnameundef{author}} and test {\ifnameundef{realauthor}})}
 	{}
-	{}
+	{\realauthor@failpatch{author/editor+others/translator+others}}
 
 
 \xpatchbibmacro{author/editor+others/translator+others}
@@ -129,7 +132,8 @@
     )%
     }%
   }
-{}{}
+  {}%
+  {\realauthor@failpatch{author/editor+others/translator+others}}
 
 
 
@@ -152,41 +156,49 @@
     )%
     }%
   }
-{}{}
+  {}
+  {\realauthor@failpatch{bbx:editor}}
+
 \xpatchbibmacro{bbx:editor}
   {\clearname{editor}}
   {\clearname{editor}
    \clearname{realeditor}
   }
-{}{}
+  {}
+  {\realauthor@failpatch{bbx:editor}}
 
 \xpatchbibmacro{bbx:editor}
   {\printnames{editor}}%
   {\printnames{editor}%
   \usebibmacro{printeditor}%
   }%
-{}{}
+  {}
+  {\realauthor@failpatch{bbx:editor}}
 
 
 \xpatchbibmacro{byeditor}
  {\ifnameundef{editor}}%
  {\ifboolexpr{test{\ifnameundef{editor}} and test{\ifnameundef{realeditor}}}}%
-{}{}
+ {}
+ {\realauthor@failpatch{byeditor}}
 
 \xpatchbibmacro{byeditor}
   {\printnames[byeditor]{editor}}%
   {\usebibmacro{printbyeditor+realeditor}}
-{}{}
+  {}
+  {\realauthor@failpatch{byeditor}}
 
 \xpatchbibmacro{byeditor+others}
  {\ifnameundef{editor}}%
  {\ifboolexpr{test{\ifnameundef{editor}} and test{\ifnameundef{realeditor}}}}%
-{}{}
+ {}
+ {\realauthor@failpatch{byeditor+others}}
 
 \xpatchbibmacro{byeditor+others}
   {\printnames[byeditor]{editor}}%
   {\usebibmacro{printbyeditor+realeditor}}
-{}{}
+  {}
+  {\realauthor@failpatch{byeditor+others}}
 
 \newbibmacro{printbyeditor+realeditor}{%
   \printnames[byeditor]{editor}%
@@ -218,17 +230,25 @@
     {%
       \printnames{labelname}%
       \ifnamesequal{labelname}{author}{%
-        \ifnameundef{realauthor}{}{\addspace\nopunct}%
-        \printnames{realauthor}%
+        \ifnameundef{realauthor}%
+          {}%
+          {\addspace\nopunct\printnames{realauthor}}%
       }{}% 
       \ifnamesequal{labelname}{editor}{%
-        \ifnameundef{realeditor}{}{\addspace\nopunct}%
-        \printnames{realeditor}%
+        \ifnameundef{realeditor}%
+        {}%
+        {\addspace\nopunct\printnames{realeditor}}%
       }{}%
     }%
 }
 \AtBeginDocument{%
-  \xpatchbibmacro{cite:name}{\printnames{labelname}}{\usebibmacro{realauthor:as:labelname}}{}{}
+  \ifcsvoid{abx@macro@cite:name}{}{%
+    \xpatchbibmacro{cite:name}%
+      {\printnames{labelname}}
+      {\usebibmacro{realauthor:as:labelname}}
+      {}
+      {\realauthor@failpatch{cite:name}}
+ }%
 }
 
 % For the dash on the bibliography, in the case two real author use the same pseudonym
