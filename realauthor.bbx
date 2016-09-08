@@ -13,7 +13,7 @@
 % The Current Maintainer of this work is Maïeul Rouquette
 % This work consists of the files realauthor.dbx, realauthor.bbx
 \ProvidesFile{realauthor.dbx}
-[2016/06/09 v2.5.0 biblatex bibliography style (MR)]
+[2016/09/08 v2.6.0 biblatex bibliography style (MR)]
 
 \ifdef{\biblatexmultipledm@bibstyle}
 	{\RequireBibliographyStyle{\biblatexmultipledm@bibstyle}}
@@ -251,6 +251,60 @@
  }%
 }
 
+% For the dash on the bibliography, in the case two real author use the same pseudonym
+
+\AtBeginDocument{
+\xapptobibmacro{bbx:savehash}{%
+  \ifboolexpr{%
+    test {\ifnamesequal{labelname}{author}}%
+    and 
+    not test {\ifnameundef{realauthor}}%
+  }%
+    {%
+      \xappto\bbx@lasthash{\thefield{realeauthorfullhash}}%
+    }%
+    {}%
+  \ifboolexpr{%
+    test {\ifnamesequal{labelname}{editor}}%
+    and 
+    not test {\ifnameundef{realeditor}}%
+  }%
+    {%
+      \xappto\bbx@lasthash{\thefield{realeditorfullhash}}%
+    }%
+    {}%
+}
+{}{\realauthor@failpatch{bbx:savehash}}
+
+\xpretobibmacro{bbx:dashcheck}{%
+  \savefield{fullhash}{\bbx@this@hash}%
+  \ifboolexpr{%
+    test {\ifnamesequal{labelname}{author}}%
+    and 
+    not test {\ifnameundef{realauthor}}%
+  }%
+    {%
+      \eappto\bbx@this@hash{\thefield{realauthorfullhash}}%
+    }%
+    {}%
+  \ifboolexpr{%
+    test {\ifnamesequal{labelname}{editor}}%
+    and 
+    not test {\ifnameundef{realeditor}}%
+  }%
+    {%
+      \eappto\bbx@this@hash{\thefield{realeditorfullhash}}%
+    }%
+    {}%
+}
+{}{\realauthor@failpatch{bbx:dashchek}}
+
+\xpatchbibmacro{bbx:dashcheck}%
+  {\iffieldequals{fullhash}{\bbx@lasthash}}%
+  {\ifdefequal{\bbx@this@hash}{\bbx@lasthash}}%
+{}{\realauthor@failpatch{bbx:dashchek}}
+
+}
 % Sorting
 
 
