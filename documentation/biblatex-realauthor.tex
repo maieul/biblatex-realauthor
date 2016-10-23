@@ -21,8 +21,8 @@
 	subtitle={New data field},
 	email={maieul <at> maieul <dot> net},
 	author={Maïeul Rouquette},
-	revision={2.6.0},
-	date={08/09/2016},
+	revision={2.7.0},
+	date={23/10/2016},
 	url={https://github.com/maieul/biblatex-realauthor}}
 
 % biblatex
@@ -107,6 +107,9 @@ The default sorting schemes \verb+nty+ is problematic, because it doesn't consid
 \end{itemize} 
   See the example file to have an illustration.
   
+ 
+ +The package also provides \verb-realauthor+manuscripts- and  \verb-realauthor+anonymous+manuscripts- sorting schemes to use in combination with the \emph{biblatex-manuscripts-philology} package (please read handbook of this package for more details about it).
+ 
 \section{Disable realauthor use}\label{userealauthor}
 
 The package, or rather \biblatex, defines an \verb+userealauthor+ option, which can be settable on a per-entry basis in the \bibfield{options} field, or by entrytype, using \cmd{ExecuteBibliographyOptions}, or globally, when loading \biblatex. 
@@ -155,6 +158,11 @@ All issues can be submitted, in French or English, in the GitHub issues page\foo
 \section{Change history}
 
 \begin{changelog}
+
+\begin{release}{2.7.0}{2016-10-23}
+  \item New sorting schemes.
+\end{release}
+
 \begin{release}{2.6.0}{2016-09-08}
   \item Take account of \bibfield{realauthor} to manage dash in bibliography.
   \item Require \biblatex\ 3.5.
@@ -189,7 +197,7 @@ All issues can be submitted, in French or English, in the GitHub issues page\foo
   \end{release}
 
   \begin{release}{2.1.0}{2014-10-30}
-  \item Add new \verb|realauthor| scheme. \see{sorting}
+  \item Add new \verb|realauthor| sorting scheme. \see{sorting}
   \end{release}
 
 

@@ -13,7 +13,7 @@
 % The Current Maintainer of this work is Maïeul Rouquette
 % This work consists of the files realauthor.dbx, realauthor.bbx
 \ProvidesFile{realauthor.dbx}
-[2016/09/08 v2.6.0 biblatex bibliography style (MR)]
+[2016/10/23 v2.7.0 biblatex bibliography style (MR)]
 
 \ifdef{\biblatexmultipledm@bibstyle}
 	{\RequireBibliographyStyle{\biblatexmultipledm@bibstyle}}
@@ -307,14 +307,7 @@
 }
 % Sorting
 
-
-\DeclareSortingScheme{realauthor}{
- \sort{
-   \field{presort}
-  }
-  \sort[final]{
-   \field{sortkey}
-  }
+\def\bbx@realauthor@sorting{
   \sort{
    \field{sortname}
    \field{author}
@@ -337,6 +330,40 @@
    \field[padside=left,padwidth=4,padchar=0]{volume}
    \literal{0000}
   }
+}
+
+\def\bbx@realauthor@sorting@anonymous{
+  \sort{
+   \field{sortname}
+   \field{author}
+   \field{realauthor}
+   \field{editor}
+   \field{realeditor}
+   \field{translator}
+   \literal{0000}
+  }
+  \sort{
+   \field{sorttitle}
+   \field{title}
+  }
+  \sort{
+   \field{sortyear}
+   \field{year}
+  }
+  \sort{
+   \field[padside=left,padwidth=4,padchar=0]{volume}
+   \literal{0000}
+  }
+}
+
+\DeclareSortingScheme{realauthor}{
+ \sort{
+   \field{presort}
+  }
+  \sort[final]{
+   \field{sortkey}
+  }
+  \bbx@realauthor@sorting
 }
 
 \DeclareSortingScheme{anonymous+realauthor}{
@@ -346,28 +373,34 @@
   \sort[final]{
    \field{sortkey}
   }
-  \sort{
-   \field{sortname}
-   \field{author}
-   \field{realauthor}
-   \field{editor}
-   \field{realeditor}
-   \field{translator}
-   \literal{0000}
-  }
-  \sort{
-   \field{sorttitle}
-   \field{title}
-  }
-  \sort{
-   \field{sortyear}
-   \field{year}
-  }
-  \sort{
-   \field[padside=left,padwidth=4,padchar=0]{volume}
-   \literal{0000}
-  }
+  \bbx@realauthor@sorting@anonymous
 }
 
+
+\AtEndPreamble{
+  \ifundef{\bbx@manuscripts@sorting}{}%
+    {
+      \DeclareSortingScheme{realauthor+manuscripts}{
+        \sort{
+          \field{presort}
+        }
+        \sort[final]{
+        \field{sortkey}
+        }   
+        \bbx@realauthor@sorting
+        \bbx@manuscripts@sorting
+      }
+      \DeclareSortingScheme{anonymous+realauthor+manuscripts}{
+        \sort{
+          \field{presort}
+        }
+        \sort[final]{
+        \field{sortkey}
+        }   
+        \bbx@realauthor@sorting@anonymous
+        \bbx@manuscripts@sorting
+      }
+    }
+}
 
 \endinput
