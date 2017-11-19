@@ -13,8 +13,11 @@
 % The Current Maintainer of this work is Maïeul Rouquette
 % This work consists of the files realauthor.dbx, realauthor.bbx
 \ProvidesFile{realauthor.dbx}
-[2016/10/23 v2.7.0 biblatex bibliography style (MR)]
+[2017/11/19 v2.7.1 biblatex bibliography style (MR)]
 
+\ifdef{\DeclareSortingTemplate}%
+  {}
+  {\let\DeclareSortingTemplate\DeclareSortingScheme}
 \ifdef{\biblatexmultipledm@bibstyle}
 	{\RequireBibliographyStyle{\biblatexmultipledm@bibstyle}}
 	{\RequireBibliographyStyle{verbose}}
@@ -356,7 +359,7 @@
   }
 }
 
-\DeclareSortingScheme{realauthor}{
+\DeclareSortingTemplate{realauthor}{
  \sort{
    \field{presort}
   }
@@ -380,7 +383,7 @@
 \AtEndPreamble{
   \ifundef{\bbx@manuscripts@sorting}{}%
     {
-      \DeclareSortingScheme{realauthor+manuscripts}{
+      \DeclareSortingTemplate{realauthor+manuscripts}{
         \sort{
           \field{presort}
         }
@@ -390,7 +393,7 @@
         \bbx@realauthor@sorting
         \bbx@manuscripts@sorting
       }
-      \DeclareSortingScheme{anonymous+realauthor+manuscripts}{
+      \DeclareSortingTemplate{anonymous+realauthor+manuscripts}{
         \sort{
           \field{presort}
         }
