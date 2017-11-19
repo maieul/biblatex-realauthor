@@ -13,7 +13,7 @@
 % The Current Maintainer of this work is Maïeul Rouquette
 % This work consists of the files realauthor.dbx, realauthor.bbx
 \ProvidesFile{realauthor.dbx}
-[2017/11/19 v2.7.1 biblatex bibliography style (MR)]
+[2017/11/19 v2.7.1a biblatex bibliography style (MR)]
 
 \DeclareDatamodelFields[type=list,datatype=name]{realauthor,realeditor}
 \DeclareDatamodelEntryfields{realauthor,realeditor}
